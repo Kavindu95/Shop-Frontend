@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SERVER_URL ='https://shop-api-2lnh.onrender.com';
+export const SERVER_URL ='https://shop-api-2lnh.onrender.com';
 
 export const login = (body) => {
   

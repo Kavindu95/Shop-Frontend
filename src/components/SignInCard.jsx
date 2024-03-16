@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../service/ApiServices";
 
 const SignInCard = () => {
@@ -83,9 +83,9 @@ const SignInCard = () => {
 
         <p className="small fw-bold mt-2 pt-1 mb-0">
           Login to your account{" "}
-          <a href="signup" className="link-danger">
+          <Link to="/signup" className="link-danger">
             Sign Up
-          </a>
+          </Link>
         </p>
       </div>
     </form>

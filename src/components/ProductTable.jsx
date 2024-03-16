@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import {
+  SERVER_URL,
   deleteProducts,
   getProduct,
   updateProducts,
@@ -97,7 +98,7 @@ const ProductTable = (props) => {
               <td>{product.name}</td>
               <td>
                 <img
-                  src={`http://localhost:5000/uploads/${product.productImage}`}
+                  src={`${SERVER_URL}/uploads/${product.productImage}`}
                   alt=""
                   width="50px"
                   height="50px"

@@ -1,5 +1,6 @@
 import React from "react";
 import { Avatar, Card } from "antd";
+import { SERVER_URL } from "../service/ApiServices";
 const { Meta } = Card;
 
 const ProductCard = (props) => {
@@ -11,7 +12,7 @@ const ProductCard = (props) => {
       cover={
         <img
           alt="example"
-          src={`http://localhost:5000/uploads/${productImage}`}
+          src={`${SERVER_URL}/uploads/${productImage}`}
           height="300px"
         />
       }
