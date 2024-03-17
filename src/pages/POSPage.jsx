@@ -47,14 +47,14 @@ function POSPage() {
 
   const addProductToCart = async (product) => {
     let findProductInCart = await cart.find((i) => {
-      return i.id === product.id;
+      return i._id === product._id;
     });
     if (findProductInCart) {
       let newCart = [];
       let newItem;
 
       cart.forEach((cartItem) => {
-        if (cartItem.id === product.id) {
+        if (cartItem._id === product._id) {
           newItem = {
             ...cartItem,
             quantity: cartItem.quantity + 1,

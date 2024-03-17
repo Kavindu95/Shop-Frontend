@@ -10,7 +10,7 @@ function MainLayout({ children }) {
         <nav className="navbar navbar-light bg-danger">
           <div className="d-flex justify-content-start m-3">
             <Link
-              to="/"
+              to="/pos"
               className="navbar-brand"
               style={{
                 fontSize: "2rem",

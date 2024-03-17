@@ -8,7 +8,8 @@ const SignUp = () => {
     <div className="" style={{ height: "100vh" }}>
       <div
         className="container-fluid h-custom"
-        style={{ backgroundImage: `url(${backgroundImage})`, height: "100%" }}
+        style={{ backgroundImage: `url(${backgroundImage})`, height: "100%" ,backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat'}}
       >
         <div className="row">
           <div className="col">

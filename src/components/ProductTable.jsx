@@ -9,6 +9,7 @@ import {
 import { Modal, message } from "antd";
 
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const ProductTable = (props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,22 +59,44 @@ const ProductTable = (props) => {
 
   const handleOk = async () => {
     setIsModalOpen(false);
-    const formData = new FormData();
+    let imageUrl = await handleUpload();
 
-    formData.append("name", name);
-    formData.append("file", image);
-    formData.append("price", price);
+    const body = { name: name, productImage: imageUrl, price: price };
 
     try {
-      await updateProducts(editItemId, formData);
+      await updateProducts(editItemId, body);
 
-      message.success("Product update successfully");
+      message.success("Product added successfully");
+
       props.fetchProducts();
+      setName("");
+      setPrice("");
+      setImage("");
     } catch (error) {
       console.log(error);
+
       if (error.response && error.response.status === 401) {
         navigate("/login");
       }
+    }
+  };
+ 
+
+  const handleUpload = async () => {
+    const formData = new FormData();
+
+    formData.append("file", image);
+    formData.append("upload_preset", "images_preset");
+
+    try {
+      let api = `https://api.cloudinary.com/v1_1/dppihtinx/image/upload`;
+
+      const res = await axios.post(api, formData);
+      const { secure_url } = res.data;
+
+      return secure_url;
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -98,7 +121,7 @@ const ProductTable = (props) => {
               <td>{product.name}</td>
               <td>
                 <img
-                  src={`${SERVER_URL}/uploads/${product.productImage}`}
+                  src={product.productImage}
                   alt=""
                   width="50px"
                   height="50px"

@@ -7,7 +7,8 @@ const SignIn = () => {
     <div className="" style={{ height: "100vh" }}>
       <div
         className="container-fluid h-custom"
-        style={{ backgroundImage: `url(${backgroundImage})`, height: "100vh" }}
+        style={{ backgroundImage: `url(${backgroundImage})`, height: "100vh",backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat' }}
       >
         <div className="row">
           <div className="col">

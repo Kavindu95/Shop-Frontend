@@ -5,6 +5,7 @@ import ProductTable from "../components/ProductTable";
 import { PlusOutlined } from "@ant-design/icons";
 import { addProducts, getProducts } from "../service/ApiServices";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const InsertProduct = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,17 +37,19 @@ const InsertProduct = () => {
 
   const handleOk = async () => {
     setIsModalOpen(false);
-    const formData = new FormData();
+    let imageUrl = await handleUpload();
 
-    formData.append("name", name);
-    formData.append("file", image);
-    formData.append("price", price);
+    const body = { name: name, productImage: imageUrl, price: price };
 
     try {
-      await addProducts(formData);
+      await addProducts(body);
 
       message.success("Product added successfully");
+
       fetchProducts();
+      setName("");
+      setPrice("");
+      setImage("");
     } catch (error) {
       console.log(error);
 
@@ -58,6 +61,24 @@ const InsertProduct = () => {
 
   const handleCancel = () => {
     setIsModalOpen(false);
+  };
+
+  const handleUpload = async () => {
+    const formData = new FormData();
+
+    formData.append("file", image);
+    formData.append("upload_preset", "images_preset");
+
+    try {
+      let api = `https://api.cloudinary.com/v1_1/dppihtinx/image/upload`;
+
+      const res = await axios.post(api, formData);
+      const { secure_url } = res.data;
+
+      return secure_url;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
